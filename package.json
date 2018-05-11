@@ -1,0 +1,18 @@
+
+"devDependencies": {},
+"scripts": {
+  "test": "npm run scss-compile",
+
+  "scss-compile": "node-sass -rw scss -o assets/css",
+
+  "watch": "npm run scss-compile"
+ },
+
+"devDependencies": {};
+"scripts": {
+  "test": "npm run scss-compile",
+
+  "scss-compile": "node-sass -rw assets/stylesheets/scss -o assets/stylesheets/css".
+  
+  "watch": "npm run scss-compile"
+},
