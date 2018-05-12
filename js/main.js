@@ -6,14 +6,13 @@ window.addEventListener('load', function () {
         h = window.innerHeight;
 
     var container, renderer, scene, camera, controls, children;
-    var raycaster, mouse = new THREE.Vector2(),
-        INTERSECTED;
+    var raycaster, mouse = new THREE.Vector2(), INTERSECTED;
 
-    var container2, renderer2, cam2, controls2, camHelper, stats, isDown = false,
-        isDragging = false;
+    var container2, renderer2, cam2, controls2, camHelper, stats, isDown = false, isDragging = false;
 
     (function init() {
-        // renderer
+        
+        // Main renderer
         renderer = new THREE.WebGLRenderer({
             antialias: true
         });
@@ -24,6 +23,7 @@ window.addEventListener('load', function () {
         container.appendChild(renderer.domElement);
 
 
+        // Preview renderer
         renderer2 = new THREE.WebGLRenderer({
             antialias: true
         });
@@ -33,70 +33,67 @@ window.addEventListener('load', function () {
         container2 = document.getElementById('container2');
         container2.appendChild(renderer2.domElement);
 
+        
+        // 
+        // Debug framerate
+        // 
+
         stats = new Stats();
 
         container2.appendChild(stats.dom);
         stats.dom.style.position = 'absolute';
 
-        // world
+
+        // Create world
         scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x1E2630, 0.0018);
+        scene.fog = new THREE.FogExp2(0x55555, 0.0018);
         renderer.setClearColor(scene.fog.color);
         renderer2.setClearColor(scene.fog.color);
 
-        // Main camera
+
+        // Create main camera
         camera = new THREE.PerspectiveCamera(60, w / h, 1, 2000);
-        camera.position.x = 25;
-        camera.position.y = 20;
-        camera.position.z = 100;
+        camera.position.set(25, 20, 100);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-
-        // Adding corner camera helper
         camHelper = new THREE.CameraHelper(camera);
         scene.add(camHelper);
 
-        threePointLight();
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-
+        // Create preview camera
         cam2 = new THREE.PerspectiveCamera(60, w / h, 1, 2000);
-        cam2.position.x = 0;
-        cam2.position.y = 100;
-        cam2.position.z = 400;
+        cam2.position.set(0,100,400);
         cam2.lookAt(new THREE.Vector3(0, 0, 0));
         controls2 = new THREE.OrbitControls(cam2, renderer2.domElement);
+    
+        scene.add(new THREE.AxisHelper(50));
+        scene.add(new THREE.GridHelper(100, 10));
 
-        // helpers
-        var axes = new THREE.AxisHelper(50);
-        scene.add(axes);
-        var gridXZ = new THREE.GridHelper(100, 10);
-        scene.add(gridXZ);
-
-
-
+        // Add lighting to the scene
+        threePointLight();
+        
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
         raycaster = new THREE.Raycaster();
-
         children = new THREE.Object3D();
-        var tmpGeometry = new THREE.Geometry();
+        
+        // var geometry = new THREE.Geometry();
+        // geometry.faces.push(new THREE.Face3(0, 1, 2));
 
-        tmpGeometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+        
+        var surfaceGeometry = new THREE.PlaneGeometry(100, 100, 32);
+        var texture = new THREE.TextureLoader().load('./assets/grass.png', function() {
+            var material = new THREE.MeshBasicMaterial({map: texture});
+            var surface = new THREE.Mesh(surfaceGeometry, material);
+            surface.rotation.x = Math.PI / 2;
+            scene.add(surface);
+        });
+        
 
-        var geometry = new THREE.BufferGeometry().fromGeometry( tmpGeometry );
-        geometry.computeBoundingSphere();
-        var texture = new THREE.TextureLoader().load( './assets/grass.png' );
-        texture.magFilter = THREE.NearestFilter;
-        texture.minFilter = THREE.LinearMipMapLinearFilter;
-        var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { map: texture } ) );
-        scene.add( mesh );
 
+        
 
-        var surfaceGeometry = new THREE.PlaneGeometry( 100, 100, 32 );
-
-        // var surfaceGeometry = new THREE.BoxGeometry( 0, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
-        var surface = new THREE.Mesh( surfaceGeometry, material );
-        surface.rotation.x = Math.PI / 2;
-        scene.add( surface );
+        
+        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+ 
 
 
         window.addEventListener('resize', onWindowResize, false);
@@ -112,21 +109,21 @@ window.addEventListener('load', function () {
 
     var loader = new THREE.OBJLoader();
 
-// load a resource
-    loader.load( './assets/FantasyHouse.obj',
-        
-        // called when resource is loaded
-        function ( house ) {
+    // load a resource
+    loader.load('./assets/FantasyHouse.obj',
 
-            scene.traverse( function ( sceneChild ) {
-                if ( sceneChild.type === 'PerspectiveCamera' ) {
+        // called when resource is loaded
+        function (house) {
+
+            scene.traverse(function (sceneChild) {
+                if (sceneChild.type === 'PerspectiveCamera') {
                     camera = sceneChild;
                     camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
                     camera.updateProjectionMatrix();
                 }
-            } );
+            });
 
-            scene.add( house );
+            scene.add(house);
             house.position.set(0, 2.5, 0);
             console.log(house.position)
         }
@@ -208,17 +205,18 @@ window.addEventListener('load', function () {
     })();
 
     function threePointLight() {
-        var directionalLight = new THREE.DirectionalLight( 0xb8b8b8 );
-        directionalLight.position.set( 1, 1, 1 ).normalize();
+        // Add 3 sources of light
+        var directionalLight = new THREE.DirectionalLight(0xb8b8b8);
+        directionalLight.position.set(1, 1, 1).normalize();
         directionalLight.intensity = 1.0;
-        scene.add( directionalLight );
-        directionalLight = new THREE.DirectionalLight( 0xb8b8b8 );
-        directionalLight.position.set( - 1, 0.6, 0.5 ).normalize();
+        scene.add(directionalLight);
+        directionalLight = new THREE.DirectionalLight(0xb8b8b8);
+        directionalLight.position.set(- 1, 0.6, 0.5).normalize();
         directionalLight.intensity = 0.5;
-        scene.add( directionalLight );
+        scene.add(directionalLight);
         directionalLight = new THREE.DirectionalLight();
-        directionalLight.position.set( - 0.3, 0.6, - 0.8 ).normalize( 0xb8b8b8 );
+        directionalLight.position.set(- 0.3, 0.6, - 0.8).normalize(0xb8b8b8);
         directionalLight.intensity = 0.45;
-        scene.add( directionalLight );
+        scene.add(directionalLight);
     }
 });
