@@ -188,7 +188,7 @@ ul li {
 }
 
 .hero-image-wrapper {
-  height: 70vh;
+  height: 80rem;
   margin: 10rem 0 10rem 0;
   display: flex;
   background-size: cover;
@@ -666,7 +666,11 @@ body {
 #pac-input:focus {
   border-bottom: solid 2px #47CC87;
   box-shadow: 0 1rem 1rem rgba(35, 35, 35, 0.2);
-  transform: translateY(-1rem);
+  transform: translate(-50%, -50%);
+  left: 50% !important;
+  top: 50% !important;
+  width: 60rem;
+  height: 7rem;
 }
 
 #pac-input:focus::placeholder {
