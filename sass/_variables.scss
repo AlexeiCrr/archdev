@@ -1,0 +1,19 @@
+// ----- Colors
+$color-white: #fff;
+$color-text:#232323;
+$color-black: #000;
+$color-primary: #d6d5d8;
+$color-primary-light: #e4e3e5;
+$color-secondary: #47CC87;
+$color-tertiary: #263E7B;
+$color-grey-light: #EDF1FB; //------
+.container {
+    max-width: 120rem;
+    padding: 0 3rem;
+    margin: 0 auto;
+}
+
+//Mixins
+@mixin transition {
+    transition: all .3s ease-in-out;
+}
