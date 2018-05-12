@@ -46,9 +46,9 @@ window.addEventListener('load', function () {
 
         // Main camera
         camera = new THREE.PerspectiveCamera(60, w / h, 1, 2000);
-        camera.position.x = 20;
-        camera.position.y = 5;
-        camera.position.z = 10;
+        camera.position.x = 25;
+        camera.position.y = 20;
+        camera.position.z = 100;
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 
@@ -113,27 +113,25 @@ window.addEventListener('load', function () {
     var loader = new THREE.OBJLoader();
 
 // load a resource
-    loader.load(
-        // resource URL
-        './assets/modern.obj',
+    loader.load( './assets/FantasyHouse.obj',
+        
         // called when resource is loaded
-        function ( object ) {
-
-            // scene = object;
-
-            console.log(scene);
+        function ( house ) {
 
             scene.traverse( function ( sceneChild ) {
                 if ( sceneChild.type === 'PerspectiveCamera' ) {
                     camera = sceneChild;
                     camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
-                    // camera.updateProjectionMatrix();
+                    camera.updateProjectionMatrix();
                 }
             } );
-            scene.add( object );
 
+            scene.add( house );
+            house.position.set(0, 2.5, 0);
+            console.log(house.position)
         }
     );
+
     function onWindowResize() {
         w = window.innerWidth;
         h = window.innerHeight;
