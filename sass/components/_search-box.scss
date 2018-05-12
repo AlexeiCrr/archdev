@@ -68,7 +68,11 @@
     &:focus {
         border-bottom: solid 2px $color-secondary;
         box-shadow: 0 1rem 1rem rgba($color-text, .2);
-        transform: translateY(-1rem);
+        transform: translate(-50%, -50%);
+        left: 50% !important;
+        top: 50% !important;
+        width: 60rem;
+        height: 7rem;
         &::placeholder {
             color: #CCCCCC;
         }
