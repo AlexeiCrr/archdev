@@ -75,27 +75,21 @@ window.addEventListener('load', function () {
         raycaster = new THREE.Raycaster();
         children = new THREE.Object3D();
         
-        // var geometry = new THREE.Geometry();
-        // geometry.faces.push(new THREE.Face3(0, 1, 2));
-
         
         var surfaceGeometry = new THREE.PlaneGeometry(100, 100, 32);
-        var texture = new THREE.TextureLoader().load('./assets/grass.png', function() {
-            var material = new THREE.MeshBasicMaterial({map: texture});
-            var surface = new THREE.Mesh(surfaceGeometry, material);
-            surface.rotation.x = Math.PI / 2;
-            scene.add(surface);
-        });
         
+        var texture = new THREE.TextureLoader().load("assets/grass.jpg");
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set( 4, 4 );
 
+        var material = new THREE.MeshBasicMaterial( { map: texture } );
 
-        
+        var surface = new THREE.Mesh(surfaceGeometry, material);
+        surface.rotation.x = -Math.PI / 2;
+        scene.add(surface);
 
-        
-        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
- 
-
-
+        // Add the listeners
         window.addEventListener('resize', onWindowResize, false);
         container.addEventListener('mousemove', onMouseMove, false);
         container.addEventListener('mousedown', onMouseDown, false);
