@@ -18,7 +18,7 @@ function initMap() {
     }); 
     map.setMapTypeId('satellite');
     map.setTilt(0);
-    initAutocomplete()
+    initAutocomplete();
 }
 
 function initAutocomplete() {
@@ -96,6 +96,12 @@ function initAutocomplete() {
             {lat: 45.795914, lng: 21.254108}  //top-left
         ];
 
+        var length = measureDistance(45.795755, 21.254548, 45.795236, 21.254176)
+        var width = measureDistance(45.795914, 21.254108, 45.795755, 21.254548)
+        console.log("length = " + length)
+        console.log("width = " + width)
+        console.log("area = " + (length * width))
+
         // Construct the polygon.
         var terrain = new google.maps.Polygon({
             paths: terrain,
@@ -106,6 +112,18 @@ function initAutocomplete() {
             fillOpacity: 0.35
         });
         terrain.setMap(map);
+    }
+
+    function measureDistance(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
+        var R = 6378.137; // Radius of earth in KM
+        var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+        var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d * 1000; // meters
     }
 
 
