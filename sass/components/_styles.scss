@@ -115,7 +115,7 @@
         &:after {
             content: '';
             transform: skewX(25deg);
-            background-image: url('./../../images/square.jpg');
+            background-image: url('../images/square.jpg');
             position: absolute;
             width: 240%;
             height: 100%;
@@ -203,13 +203,13 @@
                     position: relative;
                     @include transition;
                     &--1 {
-                        background-image: url('./../../images/model-1.jpg');
+                        background-image: url('../images/model-1.jpg');
                     }
                     &--2 {
-                        background-image: url('./../../images/model-2.jpg');
+                        background-image: url('../images/model-2.jpg');
                     }
                     &--3 {
-                        background-image: url('./../../images/model-3.jpg');
+                        background-image: url('../images/model-3.jpg');
                     }
                     .mask {
                         @include transition;
