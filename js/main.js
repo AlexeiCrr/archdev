@@ -46,9 +46,9 @@ window.addEventListener('load', function () {
 
         // Main camera
         camera = new THREE.PerspectiveCamera(60, w / h, 1, 2000);
-        camera.position.x = 0;
-        camera.position.y = 125;
-        camera.position.z = 360;
+        camera.position.x = 20;
+        camera.position.y = 5;
+        camera.position.z = 10;
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 
@@ -93,6 +93,13 @@ window.addEventListener('load', function () {
         texture.minFilter = THREE.LinearMipMapLinearFilter;
         var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { map: texture } ) );
         scene.add( mesh );
+
+
+
+        var surfaceGeometry = new THREE.BoxGeometry( 0, 1, 1 );
+        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+        var cube = new THREE.Mesh( surfaceGeometry, material );
+        scene.add( cube );
 
 
         window.addEventListener('resize', onWindowResize, false);
