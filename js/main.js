@@ -78,11 +78,6 @@ window.addEventListener('load', function () {
 
         children = new THREE.Object3D();
         var tmpGeometry = new THREE.Geometry();
-        tmpGeometry.vertices.push(
-            new THREE.Vector3( -10,  10, 0 ),
-            new THREE.Vector3( -10, -10, 0 ),
-            new THREE.Vector3(  10, -10, 0 )
-        );
 
         tmpGeometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 
@@ -95,11 +90,13 @@ window.addEventListener('load', function () {
         scene.add( mesh );
 
 
+        var surfaceGeometry = new THREE.PlaneGeometry( 100, 100, 32 );
 
-        var surfaceGeometry = new THREE.BoxGeometry( 0, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-        var cube = new THREE.Mesh( surfaceGeometry, material );
-        scene.add( cube );
+        // var surfaceGeometry = new THREE.BoxGeometry( 0, 1, 1 );
+        var material = new THREE.MeshBasicMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
+        var surface = new THREE.Mesh( surfaceGeometry, material );
+        surface.rotation.x = Math.PI / 2;
+        scene.add( surface );
 
 
         window.addEventListener('resize', onWindowResize, false);
@@ -134,18 +131,6 @@ window.addEventListener('load', function () {
                 }
             } );
             scene.add( object );
-
-        },
-        // called when loading is in progresses
-        function ( xhr ) {
-
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-        },
-        // called when loading has errors
-        function ( error ) {
-
-            console.log( 'An error happened' );
 
         }
     );
