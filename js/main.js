@@ -77,11 +77,17 @@ window.addEventListener('load', function () {
 
         children = new THREE.Object3D();
         var tmpGeometry = new THREE.Geometry();
+        tmpGeometry.vertices.push(
+            new THREE.Vector3( -10,  10, 0 ),
+            new THREE.Vector3( -10, -10, 0 ),
+            new THREE.Vector3(  10, -10, 0 )
+        );
 
+        tmpGeometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 
         var geometry = new THREE.BufferGeometry().fromGeometry( tmpGeometry );
         geometry.computeBoundingSphere();
-        var texture = new THREE.TextureLoader().load( 'assets/grass.png' );
+        var texture = new THREE.TextureLoader().load( './assets/grass.png' );
         texture.magFilter = THREE.NearestFilter;
         texture.minFilter = THREE.LinearMipMapLinearFilter;
         var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { map: texture } ) );
@@ -104,7 +110,7 @@ window.addEventListener('load', function () {
     // load a resource
     loader.load(
         // resource URL
-        'assets/modern.obj',
+        './assets/modern.obj',
         // called when resource is loaded
         function ( object ) {
 
