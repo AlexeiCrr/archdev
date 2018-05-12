@@ -16,12 +16,12 @@ function initMap() {
         }, 
         zoom:8
     }); 
+    map.setMapTypeId('satellite');
+    map.setTilt(0);
     initAutocomplete()
 }
 
 function initAutocomplete() {
-
-
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input'); 
     var searchBox = new google.maps.places.SearchBox(input); 
@@ -81,3 +81,37 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+
+    function moveToLocation() {
+        var latitude = 45.795614;
+        var longitude = 21.253636;
+        map.setCenter({lat: latitude, lng: longitude});
+        map.setZoom(20)
+
+        // Define the LatLng coordinates for the polygon's path.
+        var terrain = [
+            {lat: 45.795755, lng: 21.254548}, //top-right
+            {lat: 45.795236, lng: 21.254176}, //bottom-right
+            {lat: 45.795401, lng: 21.253713}, //bottom-left
+            {lat: 45.795914, lng: 21.254108}  //top-left
+        ];
+
+        // Construct the polygon.
+        var terrain = new google.maps.Polygon({
+            paths: terrain,
+            strokeColor: '#00FF00',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#00FF00',
+            fillOpacity: 0.35
+        });
+        terrain.setMap(map);
+    }
+
+
+
+
+
+
+
+
