@@ -13,12 +13,14 @@ html {
 
 body {
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 ::selection {
     background-color: $color-primary;
     color: $color-white;
 }
+
 ul {
     li {
         list-style: none;

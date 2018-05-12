@@ -94,6 +94,7 @@ html {
 
 body {
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -117,12 +118,40 @@ ul li {
   position: absolute;
   top: 7rem;
   left: 3rem;
+  box-shadow: 0 2rem 4rem rgba(35, 35, 35, 0.2);
   background-image: linear-gradient(to right, #fff, #EDF1FB);
-  padding: 2rem 2rem;
 }
 
-.land-item:not(last-of-type) {
-  margin-bottom: .5rem;
+.land-item {
+  padding: .5rem 2rem .5rem 2rem;
+  width: 30rem;
+}
+
+.land-item:not(:last-child) {
+  border-bottom: solid 1px rgba(35, 35, 35, 0.3);
+}
+
+.land-item .land-item-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.land-item .info {
+  font-size: 2rem;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.land-item .info .area {
+  margin-right: 1rem;
+  color: #777;
+}
+
+.land-item .info .price {
+  color: #263E7B;
+  font-weight: bold;
 }
 
 .header {
@@ -330,6 +359,10 @@ ul li {
   color: #fff;
 }
 
+.page-models .section-models {
+  min-height: 60rem;
+}
+
 .page-models .section-models .models-wrapper .model {
   min-height: 40rem;
   transition: all .3s ease-in-out;
@@ -376,6 +409,35 @@ ul li {
 
 .page-models .section-models .models-wrapper .model .model-text {
   padding: 0 1rem 2rem 1rem;
+}
+
+.preloader {
+  position: absolute;
+  z-index: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: all .3s ease-in-out;
+  transition-duration: 700ms;
+  transform: translateX(-100%);
+}
+
+.preloader-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+}
+
+.visible {
+  transform: translateX(0);
+  transition: all .3s ease-in-out;
+  opacity: 1;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(237, 241, 251, 0.99);
+  max-width: 100%;
 }
 
 .btn, .btn:link, .btn:visited {
