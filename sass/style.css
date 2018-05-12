@@ -30,8 +30,7 @@ ul li {
 }
 
 #map {
-  height: 60rem;
-  margin-top: 3rem;
+  height: 72vh;
 }
 
 .map-wrapper {
@@ -51,7 +50,7 @@ ul li {
 }
 
 .header {
-  background-image: linear-gradient(to right, rgba(71, 204, 135, 0.7), rgba(38, 62, 123, 0.4));
+  background-image: linear-gradient(to right, #263e7b, #47cc87, #47CC87, #263e7b);
 }
 
 .header .navigation {
@@ -64,7 +63,11 @@ ul li {
 
 .header .logo a {
   text-decoration: none;
-  color: #232323;
+  color: #fff;
+}
+
+.header .logo a img {
+  width: 25rem;
 }
 
 .header .logo:hover a {
@@ -85,7 +88,7 @@ ul li {
 
 .header .menu .nav-item a {
   text-decoration: none;
-  color: #232323;
+  color: #fff;
   font-size: 2rem;
   background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
   background-size: 220%;
@@ -104,6 +107,150 @@ ul li {
   margin-right: 1.5rem;
 }
 
+.hero-image-wrapper {
+  height: 70vh;
+  margin: 10rem 0 10rem 0;
+  display: flex;
+  background-size: cover;
+  background-clip: content-box;
+}
+
+.hero-image-wrapper .squares {
+  position: relative;
+}
+
+.hero-image-wrapper .squares:hover .square--1 {
+  transform: skewX(-25deg) translateY(0);
+}
+
+.hero-image-wrapper .squares:hover .square--2 {
+  transform: skewX(-25deg) translateY(0);
+}
+
+.hero-image-wrapper .squares:hover .square--3 {
+  transform: skewX(-25deg) translateY(0);
+}
+
+.hero-image-wrapper .squares:hover:after {
+  max-width: 100rem;
+}
+
+.hero-image-wrapper .squares:after {
+  transition: all .3s ease-in-out;
+  white-space: nowrap;
+  transition-duration: 2000ms;
+  content: "Build your future";
+  font-size: 6rem;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  max-width: 0;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  word-spacing: 4rem;
+}
+
+.hero-image-wrapper .square {
+  transition: all .3s ease-in-out;
+  transition-duration: 600ms;
+  height: 40rem;
+  display: inline-block;
+  width: 15rem;
+  overflow: hidden;
+}
+
+.hero-image-wrapper .square:not(:last-of-type) {
+  margin-right: 3rem;
+}
+
+.hero-image-wrapper .square--1 {
+  transform: skewX(-25deg) translateY(-4rem);
+}
+
+.hero-image-wrapper .square--2 {
+  transform: skewX(-25deg) translateY(8rem);
+}
+
+.hero-image-wrapper .square--3 {
+  transform: skewX(-25deg) translateY(2rem);
+}
+
+.hero-image-wrapper .square:after {
+  content: '';
+  transform: skewX(25deg);
+  background-image: url("./../../images/square.jpg");
+  position: absolute;
+  width: 240%;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  left: -10rem;
+}
+
+.btn-build {
+  position: absolute;
+  bottom: 4rem;
+  width: 20rem;
+  left: 45%;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  background: #263E7B;
+  padding-top: 4rem;
+}
+
+.top-footer {
+  background-image: linear-gradient(to right, #263E7B, #47CC87, #263E7B);
+  padding: 2rem 0;
+}
+
+.top-footer .social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.top-footer .social-media li:not(last-of-type) {
+  margin-right: 2rem;
+}
+
+.top-footer .social-media li:not(last-of-type) a {
+  color: white;
+  font-size: 3rem;
+}
+
+.bottom-footer {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-footer .footer-nav {
+  display: flex;
+}
+
+.bottom-footer .footer-nav li {
+  display: inline-block;
+}
+
+.bottom-footer .footer-nav li:not(:last-of-type) {
+  margin-right: 2rem;
+}
+
+.bottom-footer .footer-nav li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.bottom-footer .credits {
+  color: #fff;
+}
+
 .btn, .btn:link, .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
@@ -111,7 +258,6 @@ ul li {
   display: inline-block;
   border-radius: 5rem;
   transition: all 0.2s;
-  position: relative;
   font-size: 1.6rem;
   border: none;
   cursor: pointer;

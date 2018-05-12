@@ -1,5 +1,5 @@
 .header {
-    background-image: linear-gradient(to right, rgba($color-secondary, .7), rgba($color-tertiary, .4));
+    background-image: linear-gradient(to right, rgba($color-tertiary, 1), rgba($color-secondary, 1), $color-secondary, rgba($color-tertiary, 1));
     .navigation {
         height: 100%;
     }
@@ -7,7 +7,10 @@
         font-size: 3rem;
         a {
             text-decoration: none;
-            color: $color-text;
+            color: $color-white;
+            img {
+                width: 25rem;
+            }
         }
         &:hover {
             a {
@@ -27,7 +30,7 @@
         .nav-item {
             a {
                 text-decoration: none;
-                color: $color-text;
+                color: $color-white;
                 font-size: 2rem;
                 background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
                 background-size: 220%;
@@ -44,5 +47,134 @@
         .nav-item:not(:last-of-type) {
             margin-right: 1.5rem;
         }
+    }
+}
+
+.hero-image-wrapper {
+    height: 70vh;
+    margin: 10rem 0 10rem 0;
+    display: flex;
+    background-size: cover;
+    background-clip: content-box;
+    .squares {
+        position: relative;
+        &:hover {
+            .square {
+                &--1 {
+                    transform: skewX(-25deg) translateY(0);
+                }
+                &--2 {
+                    transform: skewX(-25deg) translateY(0);
+                }
+                &--3 {
+                    transform: skewX(-25deg) translateY(0);
+                }
+            }
+            &:after {
+                max-width: 100rem;
+            }
+        }
+        &:after {
+            @include transition;
+            white-space: nowrap;
+            transition-duration: 2000ms;
+            content: "Build your future";
+            font-size: 6rem;
+            position: absolute;
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            max-width: 0;
+            transform: translate(-50%, -50%);
+            color: $color-white;
+            word-spacing: 4rem;
+        }
+    }
+    .square {
+        @include transition;
+        transition-duration: 600ms;
+        height: 40rem;
+        display: inline-block;
+        width: 15rem;
+        overflow: hidden;
+        &:not(:last-of-type) {
+            margin-right: 3rem;
+        }
+        &--1 {
+            transform: skewX(-25deg) translateY(-4rem);
+        }
+        &--2 {
+            transform: skewX(-25deg) translateY(8rem);
+        }
+        &--3 {
+            transform: skewX(-25deg) translateY(2rem);
+        }
+        &:after {
+            content: '';
+            transform: skewX(25deg);
+            background-image: url('./../../images/square.jpg');
+            position: absolute;
+            width: 240%;
+            height: 100%;
+            background-attachment: fixed;
+            background-position: center center;
+            background-size: cover;
+            left: -10rem;
+        }
+    }
+}
+
+.btn-build {
+    position: absolute;
+    bottom: 4rem;
+    width: 20rem;
+    left: 45%;
+    text-align: center;
+}
+
+//-------FOOTER
+.footer {
+    display: flex;
+    flex-direction: column;
+    background: $color-tertiary;
+    padding-top: 4rem;
+}
+
+.top-footer {
+    background-image: linear-gradient(to right, $color-tertiary, $color-secondary, $color-tertiary);
+    padding: 2rem 0;
+    .social-media {
+        display: flex;
+        justify-content: center;
+        li:not(last-of-type) {
+            margin-right: 2rem;
+            a {
+                color: white;
+                font-size: 3rem;
+            }
+        }
+    }
+}
+
+.bottom-footer {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    .footer-nav {
+        display: flex;
+        li {
+            display: inline-block;
+            &:not(:last-of-type) {
+                margin-right: 2rem;
+            }
+            a {
+                text-decoration: none;
+                text-transform: uppercase;
+                color: $color-white;
+            }
+        }
+    }
+    .credits {
+        color: $color-white;
     }
 }
