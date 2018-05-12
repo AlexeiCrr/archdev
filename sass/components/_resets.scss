@@ -1,26 +1,46 @@
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+  height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: $color-primary;
 }
 
 html {
-    //This defines what 1rem is (10px)
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
-body {
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#container2 {
+  position: fixed;
+  > canvas {
+    width: 267px !important;
+    position: fixed;
+    right: 0;
+    border-left: 5px solid #0aeceb;
+    border-bottom: 5px solid #0aeceb;
+  }
 }
 
 ::selection {
-    background-color: $color-primary;
-    color: $color-white;
+  background-color: $color-primary;
+  color: $color-white;
 }
+
 ul {
-    li {
-        list-style: none;
-    }
+  li {
+    list-style: none;
+  }
 }
