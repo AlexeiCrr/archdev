@@ -56,6 +56,7 @@ window.addEventListener('load', function () {
         camHelper = new THREE.CameraHelper(camera);
         scene.add(camHelper);
 
+        threePointLight();
         controls = new THREE.OrbitControls(camera, renderer.domElement);
 
         cam2 = new THREE.PerspectiveCamera(60, w / h, 1, 2000);
@@ -68,7 +69,7 @@ window.addEventListener('load', function () {
         // helpers
         var axes = new THREE.AxisHelper(50);
         scene.add(axes);
-        var gridXZ = new THREE.GridHelper(500, 40);
+        var gridXZ = new THREE.GridHelper(100, 10);
         scene.add(gridXZ);
 
 
@@ -107,20 +108,31 @@ window.addEventListener('load', function () {
 
     var loader = new THREE.OBJLoader();
 
-    // load a resource
+// load a resource
     loader.load(
         // resource URL
         './assets/modern.obj',
         // called when resource is loaded
         function ( object ) {
 
+            // scene = object;
+
+            console.log(scene);
+
+            scene.traverse( function ( sceneChild ) {
+                if ( sceneChild.type === 'PerspectiveCamera' ) {
+                    camera = sceneChild;
+                    camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+                    // camera.updateProjectionMatrix();
+                }
+            } );
             scene.add( object );
 
         },
         // called when loading is in progresses
         function ( xhr ) {
 
-            console.log( ( xhr.loaded / xhr.total * 200 ) + '% loaded' );
+            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
         },
         // called when loading has errors
@@ -205,5 +217,18 @@ window.addEventListener('load', function () {
         stats.update();
     })();
 
-
+    function threePointLight() {
+        var directionalLight = new THREE.DirectionalLight( 0xb8b8b8 );
+        directionalLight.position.set( 1, 1, 1 ).normalize();
+        directionalLight.intensity = 1.0;
+        scene.add( directionalLight );
+        directionalLight = new THREE.DirectionalLight( 0xb8b8b8 );
+        directionalLight.position.set( - 1, 0.6, 0.5 ).normalize();
+        directionalLight.intensity = 0.5;
+        scene.add( directionalLight );
+        directionalLight = new THREE.DirectionalLight();
+        directionalLight.position.set( - 0.3, 0.6, - 0.8 ).normalize( 0xb8b8b8 );
+        directionalLight.intensity = 0.45;
+        scene.add( directionalLight );
+    }
 });
