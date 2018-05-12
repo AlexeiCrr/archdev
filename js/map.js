@@ -1,118 +1,57 @@
-// This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
+    //Map.js
 
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    var map;
+    var polygons = [];
 
-var map; 
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'),  {
+            center: {
+              lat:-34.397, 
+               lng:150.644
+           }, 
+           zoom:8
+      }); 
+      map.setMapTypeId('satellite');
+      map.setTilt(0);
+      initAutocomplete();
+      initShapes();
+    }
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'),  {
-        center: {
-            lat:-34.397, 
-            lng:150.644
-        }, 
-        zoom:8
-    }); 
-    map.setMapTypeId('satellite');
-    map.setTilt(0);
-    initAutocomplete();
-}
+    function initAutocomplete() {
+        var input = document.getElementById('pac-input'); 
+        var searchBox = new google.maps.places.SearchBox(input); 
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); 
 
-function initAutocomplete() {
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input'); 
-    var searchBox = new google.maps.places.SearchBox(input); 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); 
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function () {
-        searchBox.setBounds(map.getBounds());
-    });
-
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function () {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-            return;
-        }
-
-        // Clear out the old markers.
-        markers.forEach(function (marker) {
-            marker.setMap(null);
+        map.addListener('bounds_changed', function () {
+          searchBox.setBounds(map.getBounds());
         });
-        markers = [];
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function (place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+
+           if (places.length == 0) {
                 return;
             }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
 
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function (place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                   return;
+               }
 
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
+                if (place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+            map.setZoom(15);
         });
-        map.fitBounds(bounds);
-    });
-}
-
-    function moveToLocation() {
-        var latitude = 45.795614;
-        var longitude = 21.253636;
-        map.setCenter({lat: latitude, lng: longitude});
-        map.setZoom(20)
-
-        // Define the LatLng coordinates for the polygon's path.
-        var terrain = [
-            {lat: 45.795755, lng: 21.254548}, //top-right
-            {lat: 45.795236, lng: 21.254176}, //bottom-right
-            {lat: 45.795401, lng: 21.253713}, //bottom-left
-            {lat: 45.795914, lng: 21.254108}  //top-left
-        ];
-
-        var length = measureDistance(45.795755, 21.254548, 45.795236, 21.254176)
-        var width = measureDistance(45.795914, 21.254108, 45.795755, 21.254548)
-        console.log("length = " + length)
-        console.log("width = " + width)
-        console.log("area = " + (length * width))
-
-        // Construct the polygon.
-        var terrain = new google.maps.Polygon({
-            paths: terrain,
-            strokeColor: '#00FF00',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#00FF00',
-            fillOpacity: 0.35
-        });
-        terrain.setMap(map);
     }
+
+    function moveToLocation() {}
 
     function measureDistance(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
         var R = 6378.137; // Radius of earth in KM
@@ -125,6 +64,118 @@ function initAutocomplete() {
         var d = R * c;
         return d * 1000; // meters
     }
+
+    function Place () {
+        this.longitude = 0.0;
+        this.latitude = 0.0;
+
+        this.top_right_lat = 0.0;
+        this.top_right_lng = 0.0;
+
+        this.bottom_right_lat = 0.0;
+        this.bottom_right_lng = 0.0;
+
+        this.bottom_left_lat = 0.0;
+        this.bottom_left_lng = 0.0;
+
+        this.top_left_lat = 0.0;
+        this.top_left_lng = 0.0;
+    }
+
+    function initShapes() {
+
+        var shapes = [];
+
+        var object1 = new Place();
+        object1.latitude = 45.795614;
+        object1.longitude = 21.253636;
+        object1.top_right_lat = 45.795755;
+        object1.top_right_lng = 21.254548;
+        object1.bottom_right_lat = 45.795236;
+        object1.bottom_right_lng = 21.254176;
+        object1.bottom_left_lat = 45.795401;
+        object1.bottom_left_lng = 21.253713;
+        object1.top_left_lat = 45.795914;
+        object1.top_left_lng = 21.254108;
+
+        var object2 = new Place();
+        object2.latitude = 45.797090;
+        object2.longitude = 21.251242;
+        object2.top_right_lat = 45.79699;
+        object2.top_right_lng = 21.251403;
+        object2.bottom_right_lat = 45.797383;
+        object2.bottom_right_lng = 21.251707;
+        object2.bottom_left_lat = 45.797209;
+        object2.bottom_left_lng = 21.252182;
+        object2.top_left_lat = 45.796811;
+        object2.top_left_lng = 21.251867;
+
+        var object3 = new Place();
+        object3.latitude = 45.791818;
+        object3.longitude = 21.237491;
+        object3.top_right_lat = 45.791797;
+        object3.top_right_lng = 21.237569;
+        object3.bottom_right_lat = 45.792009;
+        object3.bottom_right_lng = 21.237739;
+        object3.bottom_left_lat = 45.791917;
+        object3.bottom_left_lng = 21.238015;
+        object3.top_left_lat = 45.791697;
+        object3.top_left_lng = 21.237879;
+
+        shapes.push(object1);
+        shapes.push(object2);
+        shapes.push(object3);
+
+        shapes.forEach(function(object) {
+            var latitude = object .latitude;
+            var longitude = object.longitude;
+            
+            // Define the LatLng coordinates for the polygon's path.
+            var terrainCoords = [
+                {lat: object.top_right_lat, lng: object.top_right_lng}, //top-right
+                {lat: object.bottom_right_lat, lng: object.bottom_right_lng}, //bottom-right
+                {lat: object.bottom_left_lat, lng: object.bottom_left_lng}, //bottom-left
+                {lat: object.top_left_lat, lng: object.top_left_lng}  //top-left
+            ];
+
+            var length = measureDistance(object.top_right_lat, object.top_right_lng, object.bottom_right_lat, object.bottom_right_lng);
+            var width = measureDistance(object.bottom_left_lat, object.bottom_left_lng, object.bottom_right_lat, object.bottom_right_lng);
+            console.log("length = " + length);
+            console.log("width = " + width);
+            console.log("area = " + (length * width));
+
+            // polygons.forEach(function(figure) {
+            //     figure.setMap(null)
+            // });
+            // polygons = [];
+            // Construct the polygon.
+            var shape = new google.maps.Polygon({
+                map: map,
+                paths: terrainCoords,
+                strokeColor: 'green',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: 'green',
+                fillOpacity: 0.35
+            });
+            shape.addListener('click', shapeClick);
+        });
+    }
+
+    function shapeClick(event) {
+        map.panTo({lat: event.latLng.lat(), lng: event.latLng.lng()});
+        map.setZoom(19)
+        this.setOptions({strokeColor: 'blue', fillColor: 'blue'});
+    }
+
+
+
+
+
+
+
+
+
 
 
 
