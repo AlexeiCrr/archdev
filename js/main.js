@@ -85,7 +85,7 @@ window.addEventListener('load', function () {
                 if (controls.maxDistance < 100) {
                     controls.minDistance = 90;
                     controls.maxDistance = 400;
-                    camera.position.set(0,200,0);
+                    camera.position.set(0,90,0);
                 } else {
                     controls.minDistance = 10;
                     controls.maxDistance = 80;
