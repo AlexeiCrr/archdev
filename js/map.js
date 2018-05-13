@@ -156,40 +156,27 @@
                 fillOpacity: 0.35
             });
             shape.addListener('click', shapeClick);
+            shape.addListener('mouseover', shapeMouseOver);
+            shape.addListener('mouseout', shapeMouseOut);
             globalShapes.push(shape);
         });
 
         var areas = document.getElementsByClassName("area");
         for (var i = 0; i < 3; i++) {
-            areas[i].innerText = ((getObjectArea(i) | 0) + "\u33A1");
+            areas[i].innerText = ("Area: " + (getObjectArea(i) | 0) + "\u33A1");
         };
 
-        var prices = document.getElementsByClassName("price");
-        for(var i = 0; i < 3; i++) {
-            console.log(prices[i]);
-            prices[i].innerText = (((getObjectArea(i) * 70) | 0) + "\u20ac");
-        }
+        // var prices = document.getElementsByClassName("price");
+        // for(var i = 0; i < 3; i++) {
+        //     console.log(prices[i]);
+        //     prices[i].innerText = (((getObjectArea(i) * 70) | 0) + "\u20ac");
+        // }
     }
 
     var infoWindow = null;
 
-    function shapeClick(event) {
-        globalShapes.forEach(function(shape) {
-            shape.setOptions({strokeColor: 'green', fillColor: 'green'});
-        });
-        map.panTo({lat: event.latLng.lat(), lng: event.latLng.lng()});
-        map.setZoom(19)
-        this.setOptions({strokeColor: 'blue', fillColor: 'blue'});
-        
-        var selected;
-
-        if(google.maps.geometry.poly.containsLocation(new google.maps.LatLng(object1.top_right_lat, object1.top_right_lng), this)) {
-            selected = 0;
-        } else if(google.maps.geometry.poly.containsLocation(new google.maps.LatLng(object2.top_right_lat, object2.top_right_lng), this)) {
-            selected = 1;
-        } else {
-            selected = 2;
-        }
+    function shapeMouseOver(event) {
+        var selected = detectShape(this);
 
         var address = (selected == 2) ? "Strada Fervenția 35" : "Strada Castanilor";
 
@@ -205,17 +192,41 @@
         var content = ("<b>" + address + "</b><br><br>");
         content += ("<b>Area:</b> " + (area | 0) + "m2<br>");
         content += ("(" + (length | 0) + "m x " + (width | 0) + "m)<br><br>");
-        content += ("<b>Price: 15000$</b><br><br>");
-        content += ("<button> Go to 3D view </button>");
-
+        var prices = document.getElementsByClassName("price");
+        content += ("<b>Price: " + prices[selected].innerText + "</b><br><br>");
+        content += ("<button onclick=\"loadPage()\"> Go to 3D view </button>");
 
         if(infoWindow) {
             infoWindow.close();
         }
         infoWindow = new google.maps.InfoWindow;
         infoWindow.setContent(content);
-        infoWindow.setPosition(event.latLng);
+        infoWindow.setPosition(polygonCenter(this));
         infoWindow.open(map);
+    }
+
+    function shapeMouseOut(event) {
+        if(infoWindow) {
+            infoWindow.close();
+        }
+    }
+
+    function detectShape(shape) {
+        if(google.maps.geometry.poly.containsLocation(new google.maps.LatLng(object1.top_right_lat, object1.top_right_lng), shape)) {
+            return 0;
+        } else if(google.maps.geometry.poly.containsLocation(new google.maps.LatLng(object2.top_right_lat, object2.top_right_lng), shape)) {
+            return 1;
+        }
+        return 2;
+    }
+
+    function shapeClick(event) {
+        globalShapes.forEach(function(shape) {
+            shape.setOptions({strokeColor: 'green', fillColor: 'green'});
+        });
+        map.panTo({lat: event.latLng.lat(), lng: event.latLng.lng()});
+        map.setZoom(19)
+        this.setOptions({strokeColor: 'blue', fillColor: 'blue'});
     }
 
     function objectSelected(index) {
@@ -227,31 +238,31 @@
         map.setZoom(19)
         globalShapes[index].setOptions({strokeColor: 'blue', fillColor: 'blue'});
 
-        var address = (index == 2) ? "Strada Fervenția 35" : "Strada Castanilor";
+        // var address = (index == 2) ? "Strada Fervenția 35" : "Strada Castanilor";
 
-        var length = measureDistance(objectList[index].top_right_lat, objectList[index].top_right_lng, objectList[index].bottom_right_lat, objectList[index].bottom_right_lng);
-        var width = measureDistance(objectList[index].bottom_left_lat, objectList[index].bottom_left_lng, objectList[index].bottom_right_lat, objectList[index].bottom_right_lng);
+        // var length = measureDistance(objectList[index].top_right_lat, objectList[index].top_right_lng, objectList[index].bottom_right_lat, objectList[index].bottom_right_lng);
+        // var width = measureDistance(objectList[index].bottom_left_lat, objectList[index].bottom_left_lng, objectList[index].bottom_right_lat, objectList[index].bottom_right_lng);
 
-        var area = length * width;
+        // var area = length * width;
 
-        console.log("length = " + length);
-        console.log("width = " + width);
-        console.log("area = " + (length * width));
+        // console.log("length = " + length);
+        // console.log("width = " + width);
+        // console.log("area = " + (length * width));
 
-        var content = ("<b>" + address + "</b><br><br>");
-        content += ("<b>Area:</b> " + (area | 0) + "m2<br>");
-        content += ("(" + (length | 0) + "m x " + (width | 0) + "m)<br><br>");
-        var prices = document.getElementsByClassName("price");
-        content += ("<b>Price: " + prices[index].innerText + "</b><br><br>");
-        content += ("<button onclick=\"loadPage()\"> Go to 3D view </button>");
+        // var content = ("<b>" + address + "</b><br><br>");
+        // content += ("<b>Area:</b> " + (area | 0) + "m2<br>");
+        // content += ("(" + (length | 0) + "m x " + (width | 0) + "m)<br><br>");
+        // var prices = document.getElementsByClassName("price");
+        // content += ("<b>Price: " + prices[index].innerText + "</b><br><br>");
+        // content += ("<button onclick=\"loadPage()\"> Go to 3D view </button>");
 
-        if(infoWindow) {
-            infoWindow.close();
-        }
-        infoWindow = new google.maps.InfoWindow;
-        infoWindow.setContent(content);
-        infoWindow.setPosition(polygonCenter(globalShapes[index]));
-        infoWindow.open(map);
+        // if(infoWindow) {
+        //     infoWindow.close();
+        // }
+        // infoWindow = new google.maps.InfoWindow;
+        // infoWindow.setContent(content);
+        // infoWindow.setPosition(polygonCenter(globalShapes[index]));
+        // infoWindow.open(map);
     }
 
     function loadPage() {
