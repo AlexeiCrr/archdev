@@ -11,11 +11,13 @@ body {
   padding: 0;
   box-sizing: border-box;
   background: $color-primary;
+  font-family: 'Open sans', sans-serif;
 }
 
 html {
   font-size: 62.5%;
 }
+
 
 * {
   margin: 0;
@@ -32,7 +34,6 @@ html {
     border-bottom: 5px solid #0aeceb;
   }
 }
-
 ::selection {
   background-color: $color-primary;
   color: $color-white;
