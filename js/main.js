@@ -46,6 +46,8 @@ window.addEventListener('load', function () {
         renderer.setClearColor(scene.fog.color);
         renderer2.setClearColor(scene.fog.color);
 
+
+
         // Create camera
         function createPerspectiveCamera(x, y, z) {
             // Create perspective camera at given position
@@ -93,6 +95,34 @@ window.addEventListener('load', function () {
             surface.rotation.x = -Math.PI / 2;
             scene.add(surface);
         })();
+
+
+        var material = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            shading: THREE.FlatShading
+        });
+        // Dome
+        var geometry = new THREE.IcosahedronGeometry(1300, 1);
+        var domeMaterial = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            shading: THREE.FlatShading,
+            side: THREE.BackSide
+        });
+        var dome = new THREE.Mesh(geometry, domeMaterial);
+        scene.add(dome);
+
+        // //sphere
+        geometry = new THREE.SphereGeometry(45, 10, 6);
+        var sphere = new THREE.Mesh(geometry, material.clone());
+        sphere.position.set(-60, 15, -50);
+
+        console.log(sphere);
+        // children.add(sphere);
+
+
+
+        //Dodecahedron
+
 
         // Add the listeners
         window.addEventListener('resize', onWindowResize, false);
