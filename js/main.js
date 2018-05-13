@@ -234,7 +234,7 @@ window.addEventListener('load', function () {
 
 function myFunction () {
     var preloader = document.querySelector('.preloader');
-    setTimeout(() =>  {
+    setTimeout ( function() {
         preloader.classList.toggle('visible');
     }, 2000);
 }
