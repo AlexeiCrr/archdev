@@ -9,8 +9,8 @@ window.addEventListener('load', function () {
 
     var container2, renderer2, cam2, controls2, camHelper, stats, isDown = false, isDragging = false;
     var gui = new dat.GUI();
-    
-    (function init() {
+
+    ; (function init() {
 
         // Main renderer
         renderer = new THREE.WebGLRenderer({
@@ -34,12 +34,12 @@ window.addEventListener('load', function () {
         container2.appendChild(renderer2.domElement);
 
         // Debug framerate
-        (function createFramerateDebugger() {
+        ; (function createFramerateDebugger() {
             stats = new Stats();
             container2.appendChild(stats.dom);
             stats.dom.style.position = 'absolute';
         })()
-        
+
         // Create world
         scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x55555, 0.0018);
@@ -74,14 +74,36 @@ window.addEventListener('load', function () {
         threePointLight();
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.minDistance = 50; 
+        controls.minDistance = 50;
         controls.maxDistance = 150;
         controls.minPolarAngle = 0;
         controls.maxPolarAngle = Math.PI / 2;
-        controls.enablePan = false;
-        // 10 - 50  ||  150 - 400
 
-        (function createGrassPlane() {
+        var rpgController = function () {
+            this.toggle = function () {
+                console.log("TOGGLE")
+                if (controls.maxDistance < 100) {
+                    controls.minDistance = 90;
+                    controls.maxDistance = 400;
+                    camera.position.set(0,200,0);
+                } else {
+                    controls.minDistance = 10;
+                    controls.maxDistance = 80;
+                    camera.position.set(40,5,40);
+                }
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+            };
+            this.back = function() {
+                window.location.href = "/index.html";
+            }
+        };
+
+        var buttons = new rpgController();
+        gui.add(buttons, "back");
+        gui.add(buttons, "toggle");
+        
+
+        ; (function createGrassPlane() {
             var surfaceGeometry = new THREE.PlaneGeometry(100, 100, 32);
 
             var texture = new THREE.TextureLoader().load("assets/grass.jpg");
@@ -95,34 +117,6 @@ window.addEventListener('load', function () {
             surface.rotation.x = -Math.PI / 2;
             scene.add(surface);
         })();
-
-
-        var material = new THREE.MeshPhongMaterial({
-            color: 0x000000,
-            shading: THREE.FlatShading
-        });
-        // Dome
-        var geometry = new THREE.IcosahedronGeometry(1300, 1);
-        var domeMaterial = new THREE.MeshPhongMaterial({
-            color: 0x000000,
-            shading: THREE.FlatShading,
-            side: THREE.BackSide
-        });
-        var dome = new THREE.Mesh(geometry, domeMaterial);
-        scene.add(dome);
-
-        // //sphere
-        geometry = new THREE.SphereGeometry(45, 10, 6);
-        var sphere = new THREE.Mesh(geometry, material.clone());
-        sphere.position.set(-60, 15, -50);
-
-        console.log(sphere);
-        // children.add(sphere);
-
-
-
-        //Dodecahedron
-
 
         // Add the listeners
         window.addEventListener('resize', onWindowResize, false);
@@ -160,7 +154,7 @@ window.addEventListener('load', function () {
 
     function onClick(event) {
         event.preventDefault();
-        if (!isDragging ) {
+        if (!isDragging) {
             controls.update();
         }
     }
@@ -176,7 +170,7 @@ window.addEventListener('load', function () {
         isDragging = false;
     }
 
-    (function animate() {
+    ; (function animate() {
         requestAnimationFrame(animate);
         camHelper.visible = false;
         renderer.render(scene, camera);
