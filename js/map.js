@@ -149,10 +149,10 @@
             var shape = new google.maps.Polygon({
                 map: map,
                 paths: terrainCoords,
-                strokeColor: 'green',
+                strokeColor: '#00FF00',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: 'green',
+                fillColor: '#00FF00',
                 fillOpacity: 0.35
             });
             shape.addListener('click', shapeClick);
@@ -222,21 +222,21 @@
 
     function shapeClick(event) {
         globalShapes.forEach(function(shape) {
-            shape.setOptions({strokeColor: 'green', fillColor: 'green'});
+            shape.setOptions({strokeColor: '#00FF00', fillColor: '#00FF00'});
         });
         map.panTo({lat: event.latLng.lat(), lng: event.latLng.lng()});
         map.setZoom(19)
-        this.setOptions({strokeColor: 'blue', fillColor: 'blue'});
+        this.setOptions({strokeColor: '#0000FF', fillColor: '#0000FF'});
     }
 
     function objectSelected(index) {
         console.log("Object " + index + " selected");
         globalShapes.forEach(function(shape) {
-            shape.setOptions({strokeColor: 'green', fillColor: 'green'});
+            shape.setOptions({strokeColor: '#00FF00', fillColor: '#00FF00'});
         });
         map.panTo({lat: objectList[index].latitude, lng: objectList[index].longitude});
         map.setZoom(19)
-        globalShapes[index].setOptions({strokeColor: 'blue', fillColor: 'blue'});
+        globalShapes[index].setOptions({strokeColor: '#0000FF', fillColor: '#0000FF'});
 
         // var address = (index == 2) ? "Strada Fervenția 35" : "Strada Castanilor";
 
