@@ -17,6 +17,17 @@
 .land-item {
     padding: .5rem 2rem .5rem 2rem;
     width: 30rem;
+    @include transition;
+    background-image: linear-gradient(120deg, transparent 0%, transparent 50%, lighten($color-secondary, 20%) 50%);
+    background-size: 220%;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 2rem 4rem rgba($color-text, .2);
+        background-position: 100%;
+    }
+    &:active {
+        box-shadow: 0 1rem 1rem rgba($color-text, .2);
+    }
     &:not(:last-child) {
         border-bottom: solid 1px rgba($color-text, .3);
     }
