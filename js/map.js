@@ -194,7 +194,7 @@
         content += ("(" + (length | 0) + "m x " + (width | 0) + "m)<br><br>");
         var prices = document.getElementsByClassName("price");
         content += ("<b>Price: " + prices[selected].innerText + "</b><br><br>");
-        content += ("<button onclick=\"loadPage()\"> Go to 3D view </button>");
+        content += ("<button class=\"map-button\" onclick=\"loadPage()\"> Go to 3D view </button>");
 
         if(infoWindow) {
             infoWindow.close();
