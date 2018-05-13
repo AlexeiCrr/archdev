@@ -1,260 +1,273 @@
 .header {
-    background-image: linear-gradient(to right, rgba($color-tertiary, 1), rgba($color-secondary, 1), $color-secondary, rgba($color-tertiary, 1));
-    .navigation {
-        height: 100%;
+  background-image: linear-gradient(to right, rgba($color-tertiary, 1), rgba($color-secondary, 1), $color-secondary, rgba($color-tertiary, 1));
+  .navigation {
+    height: 100%;
+  }
+  .logo {
+    font-size: 3rem;
+    a {
+      text-decoration: none;
+      color: $color-white;
+      img {
+        width: 25rem;
+      }
     }
-    .logo {
-        font-size: 3rem;
-        a {
-            text-decoration: none;
-            color: $color-white;
-            img {
-                width: 25rem;
-            }
-        }
+    &:hover {
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  .main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+  }
+  .menu {
+    display: flex;
+    .nav-item {
+      a {
+        text-decoration: none;
+        color: $color-white;
+        font-size: 2rem;
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+        background-size: 220%;
+        @include transition;
+        padding: 0 1px;
         &:hover {
-            a {
-                text-decoration: none;
-            }
+          text-decoration: none;
+          color: $color-text;
+          text-decoration: none;
+          background-position: 100%;
         }
+      }
+      .current-menu-item {
+        border-bottom: solid 2px $color-white;
+      }
     }
-    .main-nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        height: 100px;
+    .nav-item:not(:last-of-type) {
+      margin-right: 1.5rem;
     }
-    .menu {
-        display: flex;
-        .nav-item {
-            a {
-                text-decoration: none;
-                color: $color-white;
-                font-size: 2rem;
-                background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
-                background-size: 220%;
-                @include transition;
-                padding: 0 1px;
-                &:hover {
-                    text-decoration: none;
-                    color: $color-text;
-                    text-decoration: none;
-                    background-position: 100%;
-                }
-            }
-            .current-menu-item {
-                border-bottom: solid 2px $color-white;
-            }
-        }
-        .nav-item:not(:last-of-type) {
-            margin-right: 1.5rem;
-        }
-    }
+  }
 }
 
 .hero-image-wrapper {
-    height: 80rem;
-    margin: 10rem 0 10rem 0;
-    display: flex;
-    background-size: cover;
-    background-clip: content-box;
-    .squares {
-        position: relative;
-        &:hover {
-            .square {
-                &--1 {
-                    transform: skewX(-25deg) translateY(0);
-                }
-                &--2 {
-                    transform: skewX(-25deg) translateY(0);
-                }
-                &--3 {
-                    transform: skewX(-25deg) translateY(0);
-                }
-            }
-            &:after {
-                max-width: 100rem;
-            }
-        }
-        &:after {
-            @include transition;
-            white-space: nowrap;
-            transition-duration: 2000ms;
-            content: "Build your future";
-            font-size: 6rem;
-            position: absolute;
-            overflow: hidden;
-            top: 50%;
-            left: 50%;
-            max-width: 0;
-            transform: translate(-50%, -50%);
-            color: $color-white;
-            word-spacing: 4rem;
-        }
-    }
-    .square {
-        @include transition;
-        transition-duration: 600ms;
-        height: 40rem;
-        display: inline-block;
-        width: 15rem;
-        overflow: hidden;
-        &:not(:last-of-type) {
-            margin-right: 3rem;
-        }
+  height: 80rem;
+  margin: 10rem 0 10rem 0;
+  display: flex;
+  background-size: cover;
+  background-clip: content-box;
+  .squares {
+    position: relative;
+    &:hover {
+      .square {
         &--1 {
-            transform: skewX(-25deg) translateY(-4rem);
+          transform: skewX(-25deg) translateY(0);
         }
         &--2 {
-            transform: skewX(-25deg) translateY(8rem);
+          transform: skewX(-25deg) translateY(0);
         }
         &--3 {
-            transform: skewX(-25deg) translateY(2rem);
+          transform: skewX(-25deg) translateY(0);
         }
-        &:after {
-            content: '';
-            transform: skewX(25deg);
-            background-image: url('../images/square.jpg');
-            position: absolute;
-            width: 240%;
-            height: 100%;
-            background-attachment: fixed;
-            background-position: center center;
-            background-size: cover;
-            left: -10rem;
-        }
+      }
+      &:after {
+        max-width: 100rem;
+      }
     }
+    &:after {
+      @include transition;
+      white-space: nowrap;
+      transition-duration: 2000ms;
+      content: "Build your future";
+      font-size: 6rem;
+      position: absolute;
+      overflow: hidden;
+      top: 50%;
+      left: 50%;
+      max-width: 0;
+      transform: translate(-50%, -50%);
+      color: $color-white;
+      word-spacing: 4rem;
+    }
+  }
+  .square {
+    @include transition;
+    transition-duration: 600ms;
+    height: 40rem;
+    display: inline-block;
+    width: 15rem;
+    overflow: hidden;
+    &:not(:last-of-type) {
+      margin-right: 3rem;
+    }
+    &--1 {
+      transform: skewX(-25deg) translateY(-4rem);
+    }
+    &--2 {
+      transform: skewX(-25deg) translateY(8rem);
+    }
+    &--3 {
+      transform: skewX(-25deg) translateY(2rem);
+    }
+    &:after {
+      content: '';
+      transform: skewX(25deg);
+      background-image: url('../images/square.jpg');
+      position: absolute;
+      width: 240%;
+      height: 100%;
+      background-attachment: fixed;
+      background-position: center center;
+      background-size: cover;
+      left: -10rem;
+    }
+  }
 }
 
 .btn-build {
-    position: absolute;
-    bottom: 4rem;
-    width: 20rem;
-    left: 45%;
-    text-align: center;
+  position: absolute;
+  bottom: 4rem;
+  width: 20rem;
+  left: 45%;
+  text-align: center;
 }
 
 //-------FOOTER
 .footer {
+  display: flex;
+  flex-direction: column;
+  background: $color-tertiary;
+  .top-footer {
+    background-color: $color-tertiary;
+    padding: 2rem 0;
+    .social-media {
+      display: flex;
+      justify-content: center;
+      li:not(last-of-type) {
+        margin-right: 2rem;
+        a {
+          color: white;
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+  .bottom-footer {
+    padding: 2rem;
     display: flex;
-    flex-direction: column;
-    background: $color-tertiary;
-    .top-footer {
-        background-color: $color-tertiary;
-        padding: 2rem 0;
-        .social-media {
-            display: flex;
-            justify-content: center;
-            li:not(last-of-type) {
-                margin-right: 2rem;
-                a {
-                    color: white;
-                    font-size: 3rem;
-                }
-            }
+    justify-content: space-between;
+    .footer-nav {
+      display: flex;
+      li {
+        display: inline-block;
+        &:not(:last-of-type) {
+          margin-right: 2rem;
         }
+        a {
+          text-decoration: none;
+          text-transform: uppercase;
+          color: $color-white;
+        }
+      }
     }
-    .bottom-footer {
-        padding: 2rem;
-        display: flex;
-        justify-content: space-between;
-        .footer-nav {
-            display: flex;
-            li {
-                display: inline-block;
-                &:not(:last-of-type) {
-                    margin-right: 2rem;
-                }
-                a {
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    color: $color-white;
-                }
-            }
-        }
-        .credits {
-            color: $color-white;
-        }
+    .credits {
+      color: $color-white;
     }
+  }
 }
 
 .page-models {
-    .section-models {
-        min-height: 60rem;
-        .models-wrapper {
-            .model {
-                min-height: 40rem;
-                @include transition;
-                &:hover {
-                    box-shadow: 0 2rem 4rem rgba($color-text, .2);
-                    transform: scale(1.3);
-                    background-image: linear-gradient(to right, $color-white, $color-grey-light);
-                    .model-img {
-                        .mask {
-                            background-color: rgba($color-secondary, .4);
-                        }
-                    }
-                }
-                .model-img {
-                    width: 100%;
-                    height: 20rem;
-                    background-size: cover;
-                    background-position: center;
-                    position: relative;
-                    @include transition;
-                    &--1 {
-                        background-image: url('../images/model-1.jpg');
-                    }
-                    &--2 {
-                        background-image: url('../images/model-2.jpg');
-                    }
-                    &--3 {
-                        background-image: url('../images/model-3.jpg');
-                    }
-                    .mask {
-                        @include transition;
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        background-color: transparent;
-                    }
-                }
-                .model-text {
-                    padding: 0 1rem 2rem 1rem;
-                }
+  .section-models {
+    min-height: 60rem;
+    .models-wrapper {
+      .model {
+        min-height: 40rem;
+        @include transition;
+        &:hover {
+          box-shadow: 0 2rem 4rem rgba($color-text, .2);
+          transform: scale(1.3);
+          background-image: linear-gradient(to right, $color-white, $color-grey-light);
+          .model-img {
+            .mask {
+              background-color: rgba($color-secondary, .4);
             }
+          }
         }
+        .model-img {
+          width: 100%;
+          height: 20rem;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          @include transition;
+          &--1 {
+            background-image: url('../images/model-1.jpg');
+          }
+          &--2 {
+            background-image: url('../images/model-2.jpg');
+          }
+          &--3 {
+            background-image: url('../images/model-3.jpg');
+          }
+          .mask {
+            @include transition;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+          }
+        }
+        .model-text {
+          padding: 0 1rem 2rem 1rem;
+        }
+      }
     }
+  }
 }
-
 
 .vector-bulder {
   overflow: hidden;
 }
 
 .preloader {
-    position: absolute;
-    z-index: 0;
-    max-width: 0;
-    overflow: hidden;
-    @include transition;
-    transition-duration: 700ms;
-    transform: translateX(-100%);
+  position: absolute;
+  z-index: 0;
+  max-width: 0;
+  overflow: hidden;
+  @include transition;
+  transition-duration: 700ms;
+  transform: translateX(-100%);
 }
 
 .preloader-text {
-    @include absCenter;
-    font-size: 8rem;
+  @include absCenter;
+  font-size: 8rem;
 }
 
 .visible {
-    transform: translateX(0);
-    @include transition;
-    opacity: 1;
-    z-index: 1000;
-    width: 100%;
-    height: 100%;
-    background-color: rgba($color-grey-light, .99);
-    max-width: 100%;
+  transform: translateX(0);
+  @include transition;
+  opacity: 1;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-grey-light, .99);
+  max-width: 100%;
+}
+
+.vector-bulder {
+  .dg {
+    &.ac {
+      margin-top: 235px !important;
+      .cr {
+        &.function {
+          padding: 6px 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
 }
