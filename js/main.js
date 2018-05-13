@@ -8,7 +8,8 @@ window.addEventListener('load', function () {
     var container, renderer, scene, camera, controls;
 
     var container2, renderer2, cam2, controls2, camHelper, stats, isDown = false, isDragging = false;
-
+    var gui = new dat.GUI();
+    
     (function init() {
 
         // Main renderer
