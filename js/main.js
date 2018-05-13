@@ -94,7 +94,7 @@ window.addEventListener('load', function () {
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
             };
             this.back = function() {
-                window.location.href = "/index.html";
+                window.location.href = "models.html";
             }
         };
 
