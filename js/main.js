@@ -98,7 +98,7 @@ window.addEventListener('load', function () {
         var buttons = new rpgController();
         gui.add(buttons, "back");
         gui.add(buttons, "toggle");
-        
+
 
         ; (function createGrassPlane() {
             var surfaceGeometry = new THREE.PlaneGeometry(100, 100, 32);
@@ -114,6 +114,28 @@ window.addEventListener('load', function () {
             surface.rotation.x = -Math.PI / 2;
             scene.add(surface);
         })();
+
+        var material = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            shading: THREE.FlatShading
+        });
+
+        // Dome
+        var geometry = new THREE.IcosahedronGeometry(1300, 1);
+        var domeMaterial = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            shading: THREE.FlatShading,
+            side: THREE.BackSide
+        });
+        var dome = new THREE.Mesh(geometry, domeMaterial);
+        scene.add(dome);
+
+        // //sphere
+        geometry = new THREE.SphereGeometry(145, 10, 6);
+        var sphere = new THREE.Mesh(geometry, material.clone());
+        sphere.position.set(-60, 15, -50);
+
+        console.log(sphere);
 
         // Add the listeners
         window.addEventListener('resize', onWindowResize, false);
@@ -140,7 +162,7 @@ window.addEventListener('load', function () {
             scene.add(tr);
             tr.position.set(x,y,z);
         }
-        
+
         placeTree(-30, -0.5, 30);
         placeTree(30,-0.5, -30);
         placeTree(38,-0.5, -26);
