@@ -1,3 +1,39 @@
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeue.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeue.eot");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeue.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeueBold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeueBold.eot");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url("./../fonts/BebasNeueBold.woff");
+  font-weight: 700;
+}
+
 .container {
   max-width: 120rem;
   padding: 0 3rem;
@@ -95,6 +131,7 @@ html {
 body {
   box-sizing: border-box;
   overflow-x: hidden;
+  font-family: 'Bebas', sans-serif;
 }
 
 ::selection {
@@ -730,8 +767,8 @@ body {
   box-shadow: 0 1rem 1rem rgba(35, 35, 35, 0.2);
   transform: translate(-50%, -50%);
   left: 50% !important;
-  top: 50% !important;
-  width: 60rem;
+  top: 18% !important;
+  width: 50rem;
   height: 7rem;
 }
 
