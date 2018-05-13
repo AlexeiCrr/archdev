@@ -316,3 +316,21 @@
         }
     }
 }
+
+.map-button {
+    padding: 1rem 3rem;
+    @include transition;
+    cursor: pointer;
+    background-color: rgba($color-secondary, .8);
+    color: $color-white;
+    border: none;
+    border-radius: 3px;
+    &:hover {
+        transform: translateY(-3px);
+    }
+    &:active {
+        transform: translateY(-2px);
+        outline: none;
+        background-color: $color-secondary;
+    }
+}
