@@ -46,8 +46,6 @@ window.addEventListener('load', function () {
         renderer.setClearColor(scene.fog.color);
         renderer2.setClearColor(scene.fog.color);
 
-
-
         // Create camera
         function createPerspectiveCamera(x, y, z) {
             // Create perspective camera at given position
@@ -81,7 +79,6 @@ window.addEventListener('load', function () {
 
         var rpgController = function () {
             this.toggle = function () {
-                console.log("TOGGLE")
                 if (controls.maxDistance < 100) {
                     controls.minDistance = 90;
                     controls.maxDistance = 400;
@@ -132,6 +129,23 @@ window.addEventListener('load', function () {
     objLoader.load('./assets/FantasyHouse.obj', function (house) {
         scene.add(house);
         house.position.set(0, 2.5, 0);
+    });
+
+    objLoader.load("./assets/Tree2.obj", function (tree) {
+        tree.children[0].material = new THREE.MeshBasicMaterial({color: 0x995555});
+        tree.children[1].material = new THREE.MeshBasicMaterial({color: 0x00BB00});
+
+        function placeTree(x,y,z) {
+            const tr = tree.clone();
+            scene.add(tr);
+            tr.position.set(x,y,z);
+        }
+        
+        placeTree(-30, -0.5, 30);
+        placeTree(30,-0.5, -30);
+        placeTree(38,-0.5, -26);
+        placeTree(-32,-0.5, -10);
+        placeTree(-28,-0.5, -26);
     });
 
     function onWindowResize() {
