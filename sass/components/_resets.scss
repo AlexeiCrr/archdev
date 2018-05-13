@@ -5,12 +5,16 @@
 }
 
 /* Optional: Makes the sample page fill the window. */
-html, body {
+body {
   height: 100%;
   margin: 0;
   padding: 0;
-  //overflow: hidden;
-  background: #47cc87;
+  box-sizing: border-box;
+  background: $color-primary;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 * {
@@ -26,5 +30,16 @@ html, body {
     right: 0;
     border-left: 5px solid #0aeceb;
     border-bottom: 5px solid #0aeceb;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
+
+ul {
+  li {
+    list-style: none;
   }
 }

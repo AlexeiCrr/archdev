@@ -1,27 +1,116 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ArchDev</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <script type="text/javascript" src="./js/main.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link type="text/css" href="./sass/style.css" rel="stylesheet" media="screen">
 </head>
+
 <body>
 
-<a href="" class="btn btn-build">build</a>
-	<div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5k_iT2ObOpNz1AnM8bNopXOM6gqpNKj4&callback=initMap"
-    async defer></script>
+<header class="header">
+    <nav class="navigation">
+        <div class="main-nav">
+            <div class="logo"><a href="index.html"><img src="images/logo-1.png" alt=""></a></div>
+            <ul class="menu">
+                <li class="nav-item">
+                    <a class="nav-link current-menu-item" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="models.html">Models</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Menu</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<section class="hero-image-wrapper">
+    <div class="container">
+        <div class="squares">
+            <div class="square square--1">
+            </div>
+            <div class="square square--2"></div>
+            <div class="square square--3"></div>
+        </div>
+        <a class="btn btn-build btn--green btn--animated" href="map.html">build</a>
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+
+    <div class="top-footer">
+        <ul class="social-media">
+            <li class="social-item">
+                <a href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            <li>
+                <a href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fab fa-google-plus-g"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bottom-footer">
+        <nav class="footer-nav">
+            <ul class="footer-nav--list">
+                <li class="nav-item">
+                    <a href="">
+                        Site Map
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">
+                        Terms of Use
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="">Privacy Policy</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="credits">
+            <p>
+                Copyright 2018, ArchDev
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5k_iT2ObOpNz1AnM8bNopXOM6gqpNKj4&callback=initMap" async defer></script>
 </body>
 </html>

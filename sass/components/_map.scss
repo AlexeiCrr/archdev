@@ -1,0 +1,42 @@
+#map {
+    height: 72vh;
+}
+
+.map-wrapper {
+    position: relative;
+}
+
+.land {
+    position: absolute;
+    top: 7rem;
+    left: 3rem;
+    box-shadow: 0 2rem 4rem rgba($color-text, .2);
+    background-image: linear-gradient(to right, $color-white, $color-grey-light); // border: solid 1px rgba($color-text, .3);
+}
+
+.land-item {
+    padding: .5rem 2rem .5rem 2rem;
+    width: 30rem;
+    &:not(:last-child) {
+        border-bottom: solid 1px rgba($color-text, .3);
+    }
+    .land-item-title {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+    .info {
+        font-size: 2rem;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        .area {
+            margin-right: 1rem;
+            color: $color-text-grey;
+        }
+        .price {
+            color: $color-tertiary;
+            font-weight: bold;
+        }
+    }
+}

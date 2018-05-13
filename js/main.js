@@ -82,7 +82,7 @@ window.addEventListener('load', function () {
                 if (controls.maxDistance < 100) {
                     controls.minDistance = 90;
                     controls.maxDistance = 400;
-                    camera.position.set(0,200,0);
+                    camera.position.set(0,90,0);
                 } else {
                     controls.minDistance = 10;
                     controls.maxDistance = 80;
@@ -91,7 +91,7 @@ window.addEventListener('load', function () {
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
             };
             this.back = function() {
-                window.location.href = "/index.html";
+                window.location.href = "models.html";
             }
         };
 
@@ -209,3 +209,10 @@ window.addEventListener('load', function () {
         scene.add(directionalLight);
     }
 });
+
+function myFunction () {
+    var preloader = document.querySelector('.preloader');
+    setTimeout(() =>  {
+        preloader.classList.toggle('visible');
+    }, 2000);
+}
