@@ -486,6 +486,7 @@ ul li {
   transition: all .3s ease-in-out;
   transition-duration: 700ms;
   transform: translateX(-100%);
+  white-space: nowrap;
 }
 
 .preloader-text {
