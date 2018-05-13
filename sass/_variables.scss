@@ -8,6 +8,7 @@ $color-secondary: #47CC87;
 $color-tertiary: #263E7B;
 $color-grey-light: #EDF1FB;
 $color-grey-light-2: #f2f2f2;
+$color-text-grey: #777;
 //------
 .container {
     max-width: 120rem;
@@ -27,6 +28,13 @@ $gutter-horizontal: 6rem;
         display: table;
         clear: both;
     }
+}
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @mixin transition {
